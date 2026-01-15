@@ -57,7 +57,7 @@ container.appendChild(renderer.domElement);
 // Texture
 const texLoader = new THREE.TextureLoader();
 const wallTexture = texLoader.load(
-  'contents/bg/wall6.png',
+  'https://krmdylpesyfmbjumprqs.supabase.co/storage/v1/object/public/media/contents/background/wall6.png',
   (tex) => {
     if (tex.colorSpace !== undefined) {
       tex.colorSpace = THREE.SRGBColorSpace;
