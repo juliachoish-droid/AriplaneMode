@@ -57,7 +57,7 @@ container.appendChild(renderer.domElement);
 // Texture
 const texLoader = new THREE.TextureLoader();
 const wallTexture = texLoader.load(
-  'https://krmdylpesyfmbjumprqs.supabase.co/storage/v1/object/public/media/contents/background/wall6.png',
+  'https://krmdylpesyfmbjumprqs.supabase.co/storage/v1/object/public/media/contents/background/wall8.png',
   (tex) => {
     if (tex.colorSpace !== undefined) {
       tex.colorSpace = THREE.SRGBColorSpace;
@@ -224,43 +224,58 @@ function addWallPhoto({
 
 
 function renderMyRoomWallPhotos() {
-  const photos = contents.filter(
-    (c) => c.type === "gallery" || c.type === "music" || c.type ==="video"
-  );
+  const slotsByType = {
+    gallery: [
+      { yaw: -0.12, pitch:  0.13, w: 6, h: 6, push: 1 },
+      { yaw: -0.25, pitch:  0.26, w: 6, h: 6, push: 3 },
+      { yaw:  0.01, pitch:  0.28, w: 6, h: 6, push: 1 },
+      { yaw: -0.37, pitch:  0.10, w: 6, h: 6, push: 1 },
+      { yaw:  0.13, pitch:  0.12, w: 6, h: 6, push: 1 },
+      { yaw: -0.24, pitch: -0.05, w: 6, h: 6, push: 1 },
+      { yaw: -0.01, pitch: -0.08, w: 6, h: 6, push: 1 },
+    ],
+    video: [
+      { yaw: 0.9, pitch: 0.03, w: 6, h: 6, push: 0.5 },
+    ],
+    music: [
+      { yaw:  2.75, pitch:  0.158,  w: 6, h: 6, push: 0.3 },
+      { yaw:  2.95, pitch:  0.158,  w: 6, h: 6, push: 0.4 },
+      { yaw:  3.15, pitch:  0.158,  w: 6, h: 6, push: 0.3 },
+      { yaw:  3.34, pitch:  0.158,  w: 6, h: 6, push: 0.5 },
+      { yaw:  2.9,  pitch: -0.09, w: 7, h: 7, push: 0.5 },
+    ]
+  };
 
-  const slots = [
-    { yaw: -0.5, pitch: 0.05, w: 8, h: 8, push:1 },
-    { yaw: -0.35, pitch: 0.1, w: 8, h: 8, push:2 },
-    { yaw: -0.2, pitch: 0.3, w: 8, h: 8, push:3 },
-    { yaw: -0.05, pitch: 0.25, w: 8, h: 8, push:1 },
-    { yaw:  0.0, pitch: 0.0, w: 8, h: 8, push:3 },
-    { yaw:  0.2, pitch: 0.2, w: 8, h: 8, push:3 },
-    { yaw: -0.3, pitch: -0.2, w: 8, h: 8, push:3 },
-    { yaw:  0.3, pitch: -0.1, w: 8, h: 8, push:3 },
+  const contentsByType = {
+    gallery: contents.filter(c => c.type === "gallery"),
+    video: contents.filter(c => c.type === "video"),
+    music: contents.filter(c => c.type === "music"),
+  };
 
-  ];
+  const YAW_OFFSET = Math.PI; // ✅ 180도 뒤집기 (지금처럼 sphere에 붙일 거면 유지)
 
-  const YAW_OFFSET = Math.PI; // ✅ 180도 뒤집기
+  Object.entries(contentsByType).forEach(([type, items]) => {
+    const slots = slotsByType[type];
+    if (!slots || !items || items.length === 0) return;
 
-  const count = Math.min(photos.length, slots.length);
+    const count = Math.min(items.length, slots.length);
 
-  for (let i = 0; i < count; i++) {
-    const p = photos[i];
-    const s = slots[i];
+    for (let i = 0; i < count; i++) {
+      const p = items[i];
+      const s = slots[i];
 
-    addWallPhoto({
-      imgUrl: p.thumbnail,
-      w: s.w,
-      h: s.h,
-      yaw: s.yaw + YAW_OFFSET,  // ✅ 여기만!
-      pitch: s.pitch,
-      push: s.push,
-      contentId: p.id, 
-    });
-  }
+      addWallPhoto({
+        imgUrl: p.thumbnail,
+        w: s.w,
+        h: s.h,
+        yaw: s.yaw + YAW_OFFSET,
+        pitch: s.pitch,
+        push: s.push,
+        contentId: p.id,
+      });
+    }
+  });
 }
-
-
 
 renderMyRoomWallPhotos();
 
