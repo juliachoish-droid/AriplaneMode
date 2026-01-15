@@ -1,0 +1,139 @@
+/* 기본: 전부 숨김 */
+.music-box .js-open,
+.music-box .js-edit,
+.music-box .js-square {
+  display: none;
+}
+
+/* empty 상태: Add music 버튼만 */
+.music-box[data-state="empty"] .js-open {
+  display: inline-flex;
+}
+
+/* editing 상태: 입력창만 */
+.music-box[data-state="editing"] .js-edit {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* preview 상태: 썸네일(네모칸)만 */
+.music-box[data-state="preview"] .js-square {
+  display: block;
+}
+
+/* 네모칸 레이아웃 */
+.music-box .music-square{
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.18);
+}
+.music-box .music-square .js-thumb{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  z-index: 1;
+}
+.music-box .music-square .overlay-btn{
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.music-box .music-square .js-player{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:none;
+  z-index: 2;
+}
+
+/* 재생중일 때만 보이게 */
+.music-box .music-square.is-playing .js-player{ display: block; }
+.music-box .music-square.is-playing .js-thumb{ display: none; }
+
+/* Edit 버튼은 항상 위 */
+.music-box .music-square .overlay-btn{ z-index: 5; }
+
+/* 상세 보기 모드: 편집 불가 */
+.detail-view{
+  display: none;
+}
+.detail-view.is-active{
+  display: block;
+}
+
+.detail-view.is-readonly input,
+.detail-view.is-readonly textarea,
+.detail-view.is-readonly select{
+  pointer-events: none;
+  user-select: text;
+  opacity: .85;
+}
+
+.detail-view.is-readonly button:not(.close-center-page-btn){
+  pointer-events: none;
+  opacity: .4;
+}
+
+.detail-view--readonly.is-active ~ .save-center-page-btn{
+  display: none;
+}
+
+.media-preview--square{
+  width: 100%;
+  aspect-ratio: 1 / 1;   /* ⭐ 핵심 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 유튜브 썸네일 확대 */
+.media-preview.is-youtube-zoom{
+  background-size: 180%;
+  background-position: center;
+}
+.detail-view--readonly #viewMedia.is-youtube-zoom{
+  cursor: pointer;
+}
+
+/* READ ONLY – 제목 */
+.detail-view--readonly #viewTitle{
+  padding: 8px 0 6px;
+}
+
+/* READ ONLY – 날짜 */
+.detail-view--readonly #viewDate{
+  padding: 8px 0;
+  opacity: .85;
+}
+
+/* READ ONLY – 위치 */
+.detail-view--readonly #viewLocation{
+  padding: 8px 0;
+  opacity: .85;
+}
+
+/* READ ONLY – video always playing */
+#viewMedia video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#viewMedia iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}

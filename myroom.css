@@ -1,0 +1,882 @@
+/* myroom.css */
+
+/* 스크롤 막기 + 드래그 커서 */
+body.myroom {
+  overflow: hidden;
+  cursor: grab;
+  overflow-x: hidden;
+}
+
+body.myroom.dragging {
+  cursor: grabbing;
+}
+
+/* Three.js 캔버스 */
+#webgl-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  touch-action: none;
+}
+
+body.myroom.detail-open #webgl-container{
+  pointer-events: none;
+}
+
+.menu{
+  z-index:2;
+  position: fixed;
+}
+
+:root{
+  --header-h:56px;
+  --footer-h:48px;
+  --side-w:240px;
+
+  /* ✅ 닫혔을 때 보이는 손잡이 폭 */
+  --handle-w:0px;
+}
+
+#mySidenav{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+#sidenavPanels{
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 100px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+#sidenavPanels::-webkit-scrollbar{
+  display: none;
+}
+
+/* ✅ 사이드바(닫혀도 손잡이만 남김) */
+#mySidenav.sidenav{
+  position: fixed;
+  top: var(--header-h);
+  bottom: 0;
+  left: 0;
+  width: var(--side-w);
+  z-index: 15000;
+  height: 100vh;
+  overflow-y: auto;
+
+  background: #11111190;
+  backdrop-filter: blur(1px);
+
+  /* ✅ 손잡이가 바깥으로 튀어나오므로 hidden 금지 */
+  overflow: visible;
+
+  transition: transform .3s ease;
+
+  /* ✅ 닫힌 상태: 손잡이만 남겨두기 */
+  transform: translateX(calc(-100% + var(--handle-w)));
+}
+
+@media (max-width: 870px){
+  #mySidenav.sidenav{
+   top: calc(var(--header-h) + 6px);
+  }
+}
+
+#mySidenav.sidenav{
+  scrollbar-width: none;
+}
+
+#mySidenav.sidenav::-webkit-scrollbar{
+  display: none;
+}
+
+/* ✅ 열린 상태 */
+body.sidebar-open #mySidenav.sidenav{
+  transform: translateX(0);
+}
+
+/* ✅ 손잡이(토글 버튼) */
+#mySidenav .side-tab--toggle{
+  position: absolute;
+  top: 80px;
+  right: 0;
+  transform: translateX(100%);
+
+  width: 32px;
+  height: 120px;
+  padding: 6px 5px;
+
+  border: 0;
+  background: #11111190;
+  color: rgba(255,255,255,.9);
+  cursor: pointer;
+
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  justify-items: center;
+  gap: 18px;
+
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: .08em;
+
+  /* 사선 모양 */
+  clip-path: polygon(
+    0 0,
+    0% 0,
+    100% 14%,
+    100% 86%,
+    0% 100%,
+    0 100%
+  );
+}
+
+#mySidenav .side-tab__text{
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+#mySidenav .side-tab__iconbox{
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+}
+
+#mySidenav .side-tab__icon{
+  font-size: 30px;
+  line-height: 1;
+  transform: translateX(2px);
+}
+
+
+/* 텍스트/아이콘은 세로라서 같이 예쁘게 */
+.side-tab__text{ font-size: 12px; }
+.side-tab__icon{ font-size: 14px; opacity: .9; }
+
+
+
+/* CLOSE: 사이드바 오른쪽 모서리에 붙이기 */
+.sidenav .side-tab--close{
+  position: absolute;      /* 사이드바 안에서 위치 */
+  top: 120px;
+  right: -44px;            /* 바깥으로 튀어나오게 */
+  border-radius: 14px 0 0 14px;
+  clip-path: polygon(15% 0, 100% 10%, 100% 90%, 15% 100%, 0 90%, 0 10%);
+}
+
+
+/* 사이드바 내부 스크롤 */
+#mySidenav .sidenav-body{
+  height: 100%;
+  overflow-y: auto;
+  padding: 0px 0 24px;
+}
+
+#mySidenav .sidenav-body{
+  scrollbar-width: none;
+}
+
+#mySidenav .sidenav-body::-webkit-scrollbar{
+  display: none;
+}
+
+/* 헤더(고정) */
+#mySidenav .sidenav-top{
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 20px;
+}
+
+/* 제목 */
+#mySidenav .sidenav-title{
+  margin:0;
+  font-size: 20px;
+  color:#fff;
+  flex: 1;
+}
+
+/* 뒤로가기 버튼 */
+#mySidenav .header-back{
+  background:transparent;
+  border:0;
+  color:#fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+#mySidenav .header-back.is-hidden{
+  display:none;
+}
+
+/* 닫기 버튼 */
+#mySidenav .closebtn{
+  background:transparent;
+  border:0;
+  color:#fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* 프로필(아이콘) */
+#mySidenav .mymenu{
+  padding: 8px 16px 24px;
+  background: transparent;
+  border: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+#mySidenav .mymenu svg{
+  display: block;
+}
+#mySidenav .mymenu.is-hidden{
+  display: none;
+}
+.myroom-profile-img{
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
+}
+.myroom-profile-img--panel{
+  margin-top: 0;
+}
+
+
+/* HOME 메뉴 링크 */
+#sidenavHome a{
+  padding: 10px 20px;
+  display: block;
+  color:#fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+#sidenavHome a:hover{color:#f1f1f1;}
+
+#sidenavHome.is-hidden{display: none;}
+
+/* 패널 */
+.panel{ 
+  display: none; 
+  padding:8px 16px 24px; 
+  color:#fff; 
+}
+.panel.is-active{ 
+  display:block; 
+}
+
+.open-form-btn{
+  background: transparent;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+/* 패널 콘텐츠용 */
+.add-btn{
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+
+  padding: 5px 16px 5px 8px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+
+  color: #fff;
+
+  font-size: 16px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.add-btn__icon{
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid #fff;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 18px;
+  line-height: 1;
+  color:#fff;
+}
+
+.add-btn__text{
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  color: #fff;
+}
+
+/* 설명 텍스트 */
+.panel-desc{
+  margin: 12px 0 32px;
+  font-size: 14px;
+  opacity: 0.9;
+  max-width: 22ch;
+  line-height: 1.25;
+}
+
+/* 리스트 */
+.content-list{
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* 카드 */
+.content-card{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Location 줄 */
+.content-card__meta{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.01em;
+}
+
+.content-card__pin{
+  opacity: 0.9;
+}
+
+.content-card__location{
+  opacity: 0.95;
+}
+
+/* 썸네일 박스: 정사각형 =============*/
+/* 기본 썸네일 */
+.content-card__thumb{
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 유튜브 썸네일만 확대 */
+.content-card.is-youtube .content-card__thumb{
+  background-size: 180%;
+}
+
+
+/* 비디오: 기본 숨김 */
+.content-card__video{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+/* hover 시 보이기 */
+.content-card.is-video:hover .content-card__video{
+  opacity: 1;
+}
+
+
+/* 아래: Title + Date */
+.content-card__footer{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.content-card__title{
+  margin: 0;
+}
+
+.content-card__date{
+  opacity: 0.9;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/* 프로필 패널 여백 */
+.panel[data-panel="profile"]{
+  padding: 8px 16px 24px;
+}
+
+.panel[data-panel="profile"] > *{
+  margin: 8px 0;
+}
+
+.panel[data-panel="profile"] > svg{
+  margin-top: 0;
+}
+
+.panel .back-btn{
+  border:0;
+  color:#fff;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+
+/* =====콘텐츠 추가 화면 =====*/
+
+.detail-view.add-form{
+  height: 80vh;
+  min-height: 100%;
+  position: relative;
+}
+
+.detail-view.add-form .add-form__grid{
+  position: relative;
+}
+
+.detail-view.add-form .content-save{
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}
+
+
+/* 폼 전체 */
+.add-form{
+  position: relative;
+  height: 100%;
+  padding: 28px;
+  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+  gap: 28px;
+}
+
+/* X 버튼 */
+.detail-x{
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* 헤더 */
+.add-form__title{
+  margin: 0 0 18px;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+/* 2컬럼 그리드 */
+.add-form__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  height: calc(100% - 140px); /* 아래 footer 공간 빼기 */
+}
+
+/* 사진 업로드용 사각형 (upload-box 안을 꽉 채우는 바닥 레이어) */
+.photo-square{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.08);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 12px;
+  overflow: hidden;   /* ⭐ 중요: 이미지/레이어 삐져나옴 방지 */
+}
+
+
+
+/* overlay 버튼: 처음엔 숨기고, 선택되면 보이게 하고 싶으면 */
+.upload-box.photo-box .overlay-btn{
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  white-space: nowrap;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.upload-box.photo-box[data-state="filled"] .overlay-btn{
+  display: inline-flex;
+}
+
+.upload-box.photo-box[data-state="empty"] .js-photo-open{
+  position: absolute;  /* ⭐ 추가 */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.upload-box.photo-box[data-state="filled"] .js-photo-open{
+  display: none;
+}
+
+
+.add-form__right{
+  display: flex;
+  flex-direction: column;
+}
+
+/* 왼쪽 업로드 영역 */
+.upload-box{
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* ⭐ 추가 */
+}
+
+.video-square{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 비디오 미리보기 */
+.video-square video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-square{ position: absolute; inset: 0; overflow: hidden; }
+.video-square video{ width: 100%; height: 100%; object-fit: cover; }
+
+/* 버튼은 영상 위에 올리되, hover 끊겨도 괜찮게 (이건 선택) */
+.video-square .overlay-btn{ z-index: 3; }
+
+/* 비디오 오버레이 버튼: 중앙 고정 */
+.upload-box.video-box .overlay-btn{
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  white-space: nowrap;
+  background-color: rgba(0,0,0,0.3);
+}
+
+.upload-box.video-box[data-state="filled"] .overlay-btn{
+  display: inline-flex;
+}
+
+
+/* empty일 때는 video 영역 클릭 막기 */
+.upload-box.video-box[data-state="empty"] .video-square{
+  pointer-events: none;
+}
+
+
+/* 왼쪽 Add music 버튼 (pill) */
+.chip-btn{
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 5px 16px;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.chip-btn:hover{
+  background: #ffffff10;
+}
+
+.add-form__right .chip-btn{
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+
+.upload-box .chip-btn{
+  margin-top: 0;
+}
+
+/* Add form inputs */
+.add-form__left input[type="text"],
+.add-form__input{
+  width: 100%;
+  padding: 8px 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  font-size: 16px;
+}
+
+.add-form__left input[type="text"]::placeholder,
+.add-form__input::placeholder{
+  color: #b8ff5a;
+}
+
+.add-form__input{
+  resize: vertical;
+  min-height: 72px;
+  font-size: 14px;
+}
+
+/* icon + input row */
+.input-icon{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-icon__icon{
+  flex: 0 0 auto;
+  color: #b8ff5a;
+  line-height: 1;
+}
+
+.input-icon input{
+  flex: 1;
+}
+
+.chip-btn__icon{
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid #fff;
+  border-radius: 50%;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 18px;
+  line-height: 1;
+  color:#fff;
+}
+
+/* 섹션 타이틀 */
+.add-form__section-title{
+  margin: 0 0 10px;
+}
+
+.add-form__hint{
+  margin: 0 0 14px;
+  color: #b8ff5a;  /* 네 형광 포인트 */
+  line-height: 1.25;
+  font-size: 14px;
+}
+
+/* 태그 그룹 */
+.chip-group{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.chip{
+  padding: 10px 16px;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* tag-pill (Search 페이지 스타일 재사용) */
+.tag-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.tag-row--compact{
+  margin-top: 8px;
+  margin-bottom: 28px;
+}
+
+.tag-pill{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 16px 5px 8px;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tag-pill:hover{
+  background: rgba(255,255,255,0.08);
+}
+
+.tag-pill .dot{
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255,255,255,0.8);
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+}
+
+.tag-pill.is-active{
+  background: #CCFD50;
+  color: #111;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.10);
+}
+
+.tag-pill.is-active .dot{
+  background: #fff;
+  border-color: #111;
+  color: #111;
+}
+
+.tag-pill.is-active .dot::after{
+  content: "✓";
+  font-weight: 300;
+}
+
+.tag-x{
+  display: none;
+}
+
+.tag-pill.is-active .tag-x{
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 12px;
+  line-height: 1;
+  color: #111;
+}
+
+
+
+
+/* 메모 textarea */
+.memo{
+  width: 100%;
+  min-height: 120px;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(0,0,0,0.08);
+  color: #fff;
+  padding: 12px;
+  resize: vertical;
+  margin-top: 20px;
+  padding-bottom: 40px;
+}
+
+/* 아래 footer */
+.add-form__footer{
+  position: static;
+  left: 28px;
+  right: 28px;
+  bottom: 22px;
+
+  margin-top: 20px;
+  padding-bottom: 40px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* 인풋 3개 가로 */
+.field-row{
+  display: flex;
+  gap: 13px;
+  flex: 1;
+}
+
+.field{
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  padding: 10px 12px;
+}
+
+.field::placeholder,
+.memo::placeholder{
+  color: rgba(255,255,255,0.75);
+}
+
+/* 저장 버튼 */
+.save-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chip-btn .content-save{
+  right:0px;
+  bottom:0px;
+}
+
+/* Save 버튼을 그 박스 우하단으로 */
+.detail-view.is-active .content-save{
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+}
+
+
+.detail-view.add-form .content-save{ outline: 2px solid red; }
