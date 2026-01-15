@@ -196,7 +196,7 @@ function addWallPhoto({
       // ===== FRAME (behind) =====
       const frameGeo = new THREE.PlaneGeometry(w + framePad, h + framePad);
       const frameMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
+        color: 0x000000,
         side: THREE.DoubleSide,
         transparent: true,
         opacity: 0.95,
