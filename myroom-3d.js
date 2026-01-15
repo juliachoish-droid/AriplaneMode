@@ -229,14 +229,14 @@ function renderMyRoomWallPhotos() {
   );
 
   const slots = [
-    { yaw: -0.5, pitch: 0.05, w: 8, h: 8, push: 0.3 },
-    { yaw: -0.35, pitch: 0.1, w: 8, h: 8, push: 0.4 },
-    { yaw: -0.2, pitch: 0.3, w: 8, h: 8, push: 0.5 },
-    { yaw: -0.05, pitch: 0.25, w: 8, h: 8, push: 0.3 },
-    { yaw:  0.0, pitch: 0.0, w: 8, h: 8, push: 0.5 },
-    { yaw:  0.2, pitch: 0.2, w: 8, h: 8, push: 0.5 },
-    { yaw: -0.3, pitch: -0.2, w: 8, h: 8, push: 0.5 },
-    { yaw:  0.3, pitch: -0.1, w: 8, h: 8, push: 0.5 },
+    { yaw: -0.5, pitch: 0.05, w: 8, h: 8, push:1 },
+    { yaw: -0.35, pitch: 0.1, w: 8, h: 8, push:2 },
+    { yaw: -0.2, pitch: 0.3, w: 8, h: 8, push:3 },
+    { yaw: -0.05, pitch: 0.25, w: 8, h: 8, push:1 },
+    { yaw:  0.0, pitch: 0.0, w: 8, h: 8, push:3 },
+    { yaw:  0.2, pitch: 0.2, w: 8, h: 8, push:3 },
+    { yaw: -0.3, pitch: -0.2, w: 8, h: 8, push:3 },
+    { yaw:  0.3, pitch: -0.1, w: 8, h: 8, push:3 },
 
   ];
 
