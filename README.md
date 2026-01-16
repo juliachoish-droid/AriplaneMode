@@ -1,2 +1,0 @@
-# AriplaneMode
-Three.js experiment
