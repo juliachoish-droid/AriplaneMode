@@ -44,7 +44,7 @@ function setupScroll3D() {
   const Z_SPACING = 1000;
 
   // fakeScroll 높이도 카드 수에 맞게 늘려줘야 스크롤이 됨
-  fakeScroll.style.height = `${(TOTAL + 6) * 800}px`;
+  fakeScroll.style.height = `${(TOTAL + 10) * 800}px`;
 
   const cardData = cards.map((card, i) => {
     const X_RANGE = 900; // 좌우
