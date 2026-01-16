@@ -229,13 +229,13 @@ function renderMyRoomWallPhotos() {
       { yaw: -0.12, pitch:  0.13, w: 7, h: 7, push: 1 },
       { yaw: -0.25, pitch:  0.28, w: 7, h: 7, push: 3 },
       { yaw:  0.01, pitch:  0.3, w: 7, h: 7, push: 3 },
-      { yaw: -0.37, pitch:  0.10, w: 7, h: 7, push: 1 },
-      { yaw:  0.13, pitch:  0.12, w: 7, h: 7, push: 1 },
-      { yaw: -0.23, pitch: -0.07, w: 7, h: 7, push: 3 },
+      { yaw: -0.36, pitch:  0.10, w: 7, h: 7, push: 1 },
+      { yaw:  0.11, pitch:  0.12, w: 7, h: 7, push: 1 },
+      { yaw: -0.22, pitch: -0.07, w: 7, h: 7, push: 3 },
       { yaw: -0.01, pitch: -0.09, w: 7, h: 7, push: 1 },
     ],
     video: [
-      { yaw: 0.9, pitch: 0.03, w: 6, h: 6, push: 0.5 },
+      { yaw: 0.9, pitch: 0.032, w: 6, h: 6, push: 0.5 },
     ],
     music: [
       { yaw:  2.75, pitch:  0.158,  w: 6, h: 6, push: 0.3 },
