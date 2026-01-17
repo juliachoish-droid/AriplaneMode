@@ -1,0 +1,728 @@
+/* =========================
+   Base
+========================= */
+body{
+  margin:0;
+  font-family: "IBM Plex Mono", sans-serif;
+  font-weight: 300;
+  overflow: hidden;
+}
+
+/* =========================
+   Room layout (Search-style 2 column)
+========================= */
+.search-result{
+  display: flex;
+  align-items: stretch;
+  padding-top: 54px;
+  height: 100vh;
+}
+
+/* =========================
+   LEFT : User panel
+========================= */
+.search-user{
+  flex: 0 0 240px;
+  position: sticky;
+  top: calc(var(--header-h) + 12px);
+  height: 100vh;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  overflow: hidden;
+}
+
+.seacrh-user-wrap{
+  height: 100%;
+  overflow: hidden;
+}
+
+.room-toprow{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding: 12px 20px;
+}
+
+#btnBackToSearch{
+  display:inline-block;
+  margin-bottom: 0;
+  color:#fff;
+  opacity:.8;
+  font-size: 24px;
+}
+
+/* avatar */
+.search-avater{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    width: 100%;
+}
+.search-avater .chip-btn{
+  margin-left: auto;
+  transform: translateY(80%);
+}
+
+.avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
+  overflow: hidden;
+  background:#fff;
+  
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* meta */
+.meta{
+  display:flex;
+  flex-direction:column;
+}
+
+/* unused: .meta .title (no .title inside .meta in room.html)
+.meta .title,
+.room-toprow .title{
+  font-size:20px;
+}
+*/
+.room-toprow .title{
+  font-size:20px;
+}
+
+.bio-title{
+    font-size:16px;
+    padding: 0px 20px;
+    padding-top: 16px;
+}
+
+.bio{
+  font-size:14px;
+  line-height:1.5;
+  opacity:.8;
+  padding: 12px 20px;
+}
+
+
+
+/* =========================
+   Tags
+========================= */
+.tag-row-title{
+  font-size:16px;
+  padding: 10px 20px;
+  margin-top:0px;
+}
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding: 12px 12px;
+}
+
+.tag-pill--highlight{
+  display:inline-flex;
+  left:0;
+  padding:5px 16px;
+  border-radius:999px;
+  font-size: 12px;
+  color:#111;
+  background:#C8FF00;
+  box-shadow:0 0 0 1px #111 inset;
+}
+
+/* =========================
+   RIGHT : Contents area
+========================= */
+.search-contents{
+  flex:1;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.container{
+  padding: 0;
+}
+
+/* grid */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+}
+
+@media (min-width: 870px){
+  .grid{
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+
+/* =========================
+   Content card
+========================= */
+.content-item{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  /* border:1px solid #ddd; */
+  overflow:hidden;
+  background:#fff;
+}
+
+.thumb{
+  aspect-ratio: 1 / 1;
+  background:#eee;
+  background-size:cover;
+  background-position:center;
+}
+
+.thumb--youtube{
+  background-size: 180% 180%;
+}
+
+.content-meta{
+  padding:10px;
+}
+
+.content-title{
+  font-size:16px;
+}
+
+.content-sub{
+  font-size:16px;
+  opacity:.7;
+  margin-top:2px;
+}
+
+.empty{
+  opacity:.6;
+}
+
+/* =========================
+   Mobile
+========================= */
+@media (max-width: 870px){
+  body{
+    overflow: auto;
+  }
+
+  .search-result{
+    flex-direction: column;
+  }
+
+  .search-user{
+    position: static;
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0px;
+    align-items: start;
+    overflow: visible;
+  }
+
+  #search-info{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 8px;
+    row-gap: 12px;
+    align-items: start;
+    padding: 0px 10px 10px 10px;
+
+  }
+
+  .room-toprow{
+    padding-top:8px;
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .search-avatar{
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+
+  .tags-block{
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .bio-block{
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .tag-row-title{
+    padding-top: 8px;
+  }
+
+  .search-info{
+    padding: 12px;
+  }
+
+
+
+  .search-contents{
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+/* =========================
+   layout.css override (Room only)
+========================= */
+
+.search-contents .container{
+  max-width: none !important;
+  padding: 16px;
+  width: 100%;
+}
+
+.search-contents .grid{
+  width: 100%;
+}
+
+/* =========================
+   Room Detail Overlay (MyRoom-like)
+   ========================= */
+
+.detail-overlay{
+  position: fixed;
+  top: 10%;
+  bottom: 10%;
+  left: 260px;
+  right: 20px;
+  background: rgba(0,0,0,.55);
+  display: none;
+  z-index: 99999;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  
+}
+
+/* ✅ 870px 이하: 하단 70% 덮기 */
+@media (max-width: 870px){
+  .detail-overlay{
+    top: 10%;        /* 위 30% 남김 → 아래 70% 덮음 */
+    bottom: 3%;
+    left: 3%;
+    right: 3%;
+  }
+}
+
+.detail-overlay.is-open{ display: block; }
+
+/* unused: legacy detail modal styles (no .detail-modal structure in room.html)
+.detail-modal{
+  position: fixed;
+  left: 50%;
+  top: calc(var(--header-h, 56px) + 20px);
+  transform: translateX(-50%);
+  width: min(1100px, calc(100vw - 80px));
+  height: calc(100vh - (var(--header-h, 56px) + var(--footer-h, 48px) + 80px));
+  background: rgba(110,110,110,.92);
+  backdrop-filter: blur(2px);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 22px 70px rgba(0,0,0,.35);
+}
+.detail-close{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.7);
+  background: rgba(0,0,0,.15);
+  color: #fff;
+  cursor: pointer;
+  z-index: 2;
+  line-height: 1;
+}
+.detail-grid{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+}
+.detail-left{
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+}
+.detail-media{
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  background: rgba(0,0,0,.15);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.detail-under{
+  flex: 0 0 auto;
+  padding: 18px 22px 22px;
+  color: #fff;
+}
+.detail-media img,
+.detail-media video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.detail-title{
+  margin: 0 0 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+.detail-meta-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: .85;
+  font-size: 14px;
+}
+.detail-dot{ opacity: .6; }
+.detail-right{
+  border-left: 1px solid rgba(255,255,255,.15);
+  padding: 22px;
+  color: #fff;
+  overflow: auto;
+}
+.detail-right-block{
+  margin-bottom: 22px;
+}
+.detail-label{
+  font-size: 14px;
+  opacity: .85;
+  margin-bottom: 10px;
+}
+.detail-tags{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.detail-tags .tag{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #C8FF00;
+  color: #111;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 0 0 1px #111 inset;
+}
+.detail-text{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  opacity: .92;
+  white-space: pre-wrap;
+}
+@media (max-width: 860px){
+  .detail-modal{
+    width: calc(100vw - 32px);
+    height: calc(100vh - (var(--header-h, 56px) + var(--footer-h, 48px) + 32px));
+    top: calc(var(--header-h, 56px) + 16px);
+  }
+  .detail-grid{
+    grid-template-columns: 1fr;
+    grid-template-rows: 60% 40%;
+  }
+  .detail-right{
+    border-left: 0;
+    border-top: 1px solid rgba(255,255,255,.15);
+  }
+}
+*/
+
+/* =========================
+   Room Detail View (MyRoom styles)
+========================= */
+.detail-overlay .detail-view{
+  display: none;
+}
+
+.detail-overlay .detail-view.is-active{
+  display: block;
+}
+
+
+/* unused: readonly form controls (no inputs/extra buttons in room.html)
+.detail-overlay .detail-view.is-readonly input,
+.detail-overlay .detail-view.is-readonly textarea,
+.detail-overlay .detail-view.is-readonly select{
+  pointer-events: none;
+  user-select: text;
+  opacity: .85;
+}
+.detail-overlay .detail-view.is-readonly button:not(.close-center-page-btn){
+  pointer-events: none;
+  opacity: .4;
+}
+*/
+
+.detail{
+  position: absolute; /* 오버레이 안에서 위에 고정하고 싶으면 */
+  right: 4px;
+  z-index: 5;
+
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.detail-overlay .close-center-page-btn{
+  background: transparent;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+.detail-overlay .add-form__grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.detail-overlay .add-form__right{
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-overlay .add-form__section-title{
+  margin: 0 0 10px;
+}
+
+.detail-overlay .upload-box{
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  background: rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.detail-overlay .media-preview--square{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.detail-overlay .media-preview.is-youtube-zoom{
+  background-size: 180%;
+  background-position: center;
+}
+
+.detail-overlay .detail-view--readonly #viewTitle{
+  padding: 8px 0 6px;
+}
+
+.detail-overlay .detail-view--readonly #viewDate{
+  padding: 8px 0;
+  opacity: .85;
+}
+
+.detail-overlay .detail-view--readonly #viewLocation{
+  padding: 8px 0;
+  opacity: .85;
+}
+
+.detail-overlay .detail-view--readonly #viewLocation::before{
+  content: "📍 ";
+}
+
+.detail-overlay #viewMedia video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-overlay .tag-row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.detail-overlay #viewTags .tag-pill--highlight{
+  font-size: 14px;
+  padding: 5px 8px;
+}
+
+.detail-overlay #viewTags{
+  padding: 0;
+  padding-bottom: 24px
+}
+
+.detail-overlay .tag-row--compact{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* 저장버튼 */
+.chip-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 8px 5px 8px;
+  border: 1px solid #fff;          /* 기본 아웃라인 화이트 */
+  border-radius: 999px;
+  background: transparent;         /* 기본 배경 없음 */
+  font-size: 13px;
+  color: #fff;                     /* 기본 글자 화이트 */
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+/* 기본 상태 hover */
+.chip-btn:hover{
+  background: rgba(255,255,255,0.1);
+}
+
+/* 선택된 상태 */
+.chip-btn.is-active{
+  padding: 5px 16px;
+  background-color: #CCFD50;       /* 형광초록 */
+  color: #111;                     /* 글자 블랙 */
+  border-color: #111;              /* 아웃라인 블랙 */
+}
+
+/* 비활성 */
+.chip-btn:disabled{
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+
+.room-actions{
+  display:flex;
+  justify-content:flex-end;
+}
+.content-item{
+  position: relative;
+}
+
+.content-save-btn{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+
+  border: 1px solid #000;
+  background: #fff;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.content-save-btn.is-active{
+  font-weight: 700;
+  color: #CCFD50;
+  text-shadow:
+    -1px 0 #111,
+    1px 0 #111,
+    0 -1px #111,
+    0 1px #111;
+}
+.content-save-btn .star-icon--outline,
+.content-save-btn .star-icon--filled{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .15s ease;
+  font-size: 1.3em;
+}
+.content-save-btn .star-icon--filled{
+  color: #CCFD50;
+  opacity: 0;
+}
+.content-save-btn .star-icon--outline{
+  color: #111;
+}
+.content-save-btn.is-active .star-icon--outline{
+  opacity: 0;
+}
+.content-save-btn.is-active .star-icon--filled{
+  opacity: 1;
+}
+
+/* toast (undo) */
+.toast-undo{
+  position: fixed;
+  right: 16px;
+  top: calc(var(--header-h) - 3px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #CCFD50;
+  color: #111;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 100000;
+}
+.toast-undo.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.toast-undo__btn{
+  border: 1px solid #111;
+  background: #fff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* 클릭이슈... */
+
+.detail-overlay{
+  display: none;
+  pointer-events: none;   /* ✅ 닫혔으면 클릭 못 먹음 */
+}
+
+.detail-overlay.is-open{
+  display: block;
+  pointer-events: auto;   /* ✅ 열렸을 때만 클릭 먹음 */
+}
+
+header, .global-header, .menu, .topbar{
+  position: fixed;   /* or sticky */
+  top: 0;
+  z-index: 100000;
+}
+
+#openNavBtn, .burger-btn, .burger{
+  position: relative;
+  z-index: 100001;
+}

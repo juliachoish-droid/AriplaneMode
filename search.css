@@ -1,0 +1,359 @@
+/* 전체 중앙 컨테이너 */
+.search-ui{
+  max-width: 960px;
+  margin: 20px auto 0;
+  padding: 0 clamp(16px, 4vw, 48px);
+}
+
+/* 검색바 */
+.searchbar{
+  width: min(900px, 90%);
+  margin: 0 auto;
+  margin-bottom: 8px;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.search-input{
+  border: none;
+  outline: none;
+  background: transparent;
+
+  padding: 0px 16px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.search-btn{
+  width: 40px;
+  height: 40px;
+  margin: 4px;
+
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+
+  font-size: 24px;
+  line-height:1;
+}
+
+.search-btn:hover{
+  background: #CCFD50;
+}
+
+/* 태그 영역 */
+.tag-row{
+  margin: 10px auto 0;
+  width: min(1100px, 95%);
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+/* pill 태그 */
+.tag-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 16px 5px 8px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-right{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tag-pill:hover{
+  background: #f3f3f3;
+}
+
+/* 왼쪽 동그라미 */
+.tag-pill .dot{
+  width: 28px;
+  height: 28px;
+  border: 1px solid #111;
+  border-radius: 50%;
+
+  display: inline-grid;
+  place-items: center;
+}
+
+/* 선택 상태 (나중에 JS로 붙일 클래스) */
+.tag-pill.is-active{
+  background: #CCFD50;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.10);
+}
+
+.tag-pill.is-active .dot{
+  background: #fff;
+}
+
+.tag-pill.is-active .dot::after{
+  content: "✓";
+  font-weight: 300;
+}
+
+.tag-pill.is-active::after{
+  content: "×";
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  width: 18px;
+  height: 18px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.tag-pill{
+  position: relative;
+}
+
+/* 기본은 숨김 */
+.tag-x{
+  display: none;
+}
+
+/* 선택된 상태에서만 x 표시 */
+.tag-pill.is-active .tag-x{
+  display: grid;
+  place-items: center;
+
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  width: 18px;
+  height: 18px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* 섹션 공통 */
+.section-block{
+  max-width: 960px;
+  margin: 40px auto 0;
+  padding: 0;   /* 중요 */
+}
+
+.section-title{
+  font-size: 22px;
+  font-weight: 300;
+  margin: 22px 0 14px;
+}
+
+.is-hidden{
+  display: none !important;
+}
+
+/* Followed Rooms 리스트 */
+.rooms-list{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.room-item{
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* .avatar{
+  width: 56px;
+  height: 56px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  position: relative;
+}
+.avatar::before{
+  content:"";
+  position:absolute;
+  top: 12px; left: 50%;
+  width: 14px; height: 14px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+.avatar::after{
+  content:"";
+  position:absolute;
+  bottom: 10px; left: 50%;
+  width: 26px; height: 16px;
+  border: 1px solid #111;
+  border-top: none;
+  border-radius: 0 0 999px 999px;
+  transform: translateX(-50%);
+} */
+
+.avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.08);
+  display: grid;
+  place-items: center;
+}
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.room-name{
+  font-size: 18px;
+}
+
+.room-desc{
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 4px;
+  max-width: 520px;
+}
+
+/* Bookmarked Contents 리스트 */
+.contents-list{
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.content-item{
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 18px;
+  align-items: start;
+  text-decoration: none;
+}
+
+/* .thumb{
+  width: 160px;
+  height: 160px;
+  background: #d9d9d9;
+  border: 1px solid #111;
+} */
+
+.thumb{
+  width: 200px;        /* 너 디자인에 맞게 */
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  background: rgba(0,0,0,0.08);
+  background-size: cover;
+  background-position: center;
+}
+
+/* 🎵 유튜브 썸네일만 살짝 확대 */
+.thumb--youtube {
+  background-size: 180%;   /* ← 핵심 */
+  background-position: center;
+}
+
+.content-title{
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.content-sub{
+  font-size: 14px;
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.content-desc{
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 10px;
+  line-height: 1.5;
+  max-width: 560px;
+}
+
+/* 섹션 버튼 오른쪽 정렬 */
+.section-actions{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+/* Show more pill 버튼 */
+.pill-btn{
+  display: inline-flex;
+  margin-left: auto;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 5px 16px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pill-icon{
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #111;
+  border-radius: 999px;
+}
+
+.pill-btn:hover{
+  background: #f3f3f3;
+}
+
+.pill-btn:hover .pill-icon{
+  background: #CCFD50;
+}
+
+
+
+:root{
+  --header-h: 66px;
+  --footer-h: 120px;
+}
+
+
+
+@media (max-width: 870px){
+  :root{
+    --header-h: 58px;
+    --footer-h: 220px;
+  }
+}
+
+.empty{
+  font-size: 16px;
+}

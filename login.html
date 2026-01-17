@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirplaneMode_Login</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="login.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="global-header">
+        <div class="header-inner">
+
+            <nav class="header-nav header-nav--left">
+                <a href="index.html" class="nav-link" >Home</a>
+                <a href="MyRoom.html" class="nav-link">My&nbsp;Room</a>
+            </nav>
+
+            <div class="header-center">
+                <a href="index.html" class="header-logo">Airplane_Mode</a>
+            </div>
+
+            <nav class="header-nav header-nav--right">
+                <a href="Search.html" class="nav-link">Search</a>
+                <a href="Library.html" class="nav-link">Library</a>
+                <a href="login.html" class="nav-link nav-icon">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.4555 22.2764C17.7466 20.3677 15.2635 19.1667 12.5 19.1667C9.73646 19.1667 7.25323 20.3677 5.54427 22.2764M12.5 24.5C5.87258 24.5 0.5 19.1274 0.5 12.5C0.5 5.87258 5.87258 0.5 12.5 0.5C19.1274 0.5 24.5 5.87258 24.5 12.5C24.5 19.1274 19.1274 24.5 12.5 24.5ZM12.5 15.1667C10.2909 15.1667 8.5 13.3758 8.5 11.1667C8.5 8.95753 10.2909 7.16667 12.5 7.16667C14.7091 7.16667 16.5 8.95753 16.5 11.1667C16.5 13.3758 14.7091 15.1667 12.5 15.1667Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </nav> 
+
+            <nav class="header-nav header-nav--burger">
+                <button class="burger-btn" aria-label="Open menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 17H19M5 12H19M5 7H19" stroke="#15181D" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </nav>
+
+        </div> 
+
+        <!-- ✅ 모바일 전용 메뉴 패널 -->
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <div class="mobile-menu__inner">
+            <div class="mobile-menu__top">
+                <a href="index.html" class="header-logo">Airplane_Mode</a>
+                <div class="mobile-menu__action">
+                    <a href="login.html" class="mobile-link mobile-link--icon" aria-label="Profile">
+                        <svg width="22" height="22" viewBox="0 0 25 25" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.4555 22.2764C17.7466 20.3677 15.2635 19.1667 12.5 19.1667
+                            C9.73646 19.1667 7.25323 20.3677 5.54427 22.2764
+                            M12.5 24.5C5.87258 24.5 0.5 19.1274 0.5 12.5
+                            C0.5 5.87258 5.87258 0.5 12.5 0.5
+                            C19.1274 0.5 24.5 5.87258 24.5 12.5
+                            C24.5 19.1274 19.1274 24.5 12.5 24.5
+                            Z
+                            M12.5 15.1667C10.2909 15.1667 8.5 13.3758 8.5 11.1667
+                            C8.5 8.95753 10.2909 7.16667 12.5 7.16667
+                            C14.7091 7.16667 16.5 8.95753 16.5 11.1667
+                            C16.5 13.3758 14.7091 15.1667 12.5 15.1667Z"
+                            stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <button class="mobile-menu__close" type="button" aria-label="Close menu">X</button>
+                </div>
+            </div>
+
+            <nav class="mobile-menu__nav">
+                <a href="index.html" class="mobile-link">Home</a>
+                <a href="MyRoom.html" class="mobile-link">My Room</a>
+                <a href="Search.html" class="mobile-link">Search</a>
+                <a href="Library.html" class="mobile-link">Library</a>
+            </nav>
+            </div>
+        </div>
+
+        <!-- ✅ 배경 누르면 닫히는 오버레이 -->
+        <div class="mobile-overlay" data-close-menu></div>
+    </header>
+    
+    <main class="main page-container">
+        <!-- 로그인 페이지 진입 -->
+        <section class="page is-active" id="step-login" data-step="login">
+            <!-- 로그인창 -->
+            <div class="login-page">
+                <div class="form-group">
+                    <label>
+                        ID
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Password
+                    </label>
+                    <input type="text">
+                </div>
+                <!-- 버튼 -->
+                <div class="login-actions">
+                    <div class="Createaccount-button1">
+                        <a href="#" id="">Log in <span class="pill-icon">→</span></a>
+                    </div>
+                    <div class="Createaccount-button2">
+                        <a href="#" data-show-step="signup-email">Create Account</a>
+                    </div>
+                    <div class="Createaccount-button2">
+                        <a href="#">Forgot Email/Password?</a>
+                    </div>
+                </div>
+                <!-- 히어로 텍스트 -->
+                <div class="Herotext">
+                    <h2>Step into your Space</h2>
+                </div>  
+            </div>
+        </section>
+
+        
+
+        <!-- 계정만들기1페이지 -->
+        <section class="page" data-step="signup-email">
+            <div class="Makeaccount1">
+                <!-- 로그인창 -->
+                <div class="form-group">
+                    <label>
+                        Email adress
+                    </label>
+                    <input type="text">
+                    <button class="Makeaccount-button3">Send Verification Email</button>
+                </div>
+                <div class="form-group">
+                    <label>
+                        ID
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Password
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Confimr Password
+                    </label>
+                    <input type="text">
+                </div>
+                <div class="step-button-row">
+                    <button class="Makeaccount-button4 is-hidden" type="button" data-show-step="signup-profile">Go to next step<span class="pill-icon">→</span></button>
+                </div>
+                <!-- 히어로 텍스트 -->
+                <div class="Herotext">
+                    <h2>Create your Space</h2>
+                </div>  
+                <div class="modal-overlay" id="emailModal">
+                    <div class="modal">
+                        <div class="modal-header">
+                            <p>Notification</p>
+                            <button class="emailModal-Xbutton">X</button>
+                        </div>
+                        <p class="modal-message">Please click the verification link in the email.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 계정만들기2페이지 -->
+        <section class="page" data-step="signup-profile">
+            <div class="Makeaccount2">
+                <!-- 프로필 선택 -->
+                <div class="profile-row">
+                    <div class="form-group">Choose the Profile</div>
+                    <div class="profile-content">
+                        <div class="avatar"></div>
+                        <label for="profileInput" class="Makeaccount-button3 profile-upload-label">
+                            Select image
+                        </label>
+                    </div>
+                    <input id="profileInput" class="profile-upload-input" type="file" accept="image/*">
+                </div>
+                <!-- 컬러버튼 -->
+                <div class="theme-block">
+                    <div class="section-title">
+                        Choose the Theme
+                    </div>
+                    <div class="theme-color">
+                        <button class="color-option selected" data-theme="1"><span class="color-x" aria-hidden="false">×</span></button>
+                        <button class="color-option" data-theme="2"><span class="color-x" aria-hidden="true">×</span></button>
+                        <button class="color-option" data-theme="3"><span class="color-x" aria-hidden="true">×</span></button>
+                        <button class="color-option" data-theme="4"><span class="color-x" aria-hidden="true">×</span></button>
+                        <button class="color-option" data-theme="5"><span class="color-x" aria-hidden="true">×</span></button>
+                        <button class="color-option" data-theme="6"><span class="color-x" aria-hidden="true">×</span></button>
+                        <button class="color-option" data-theme="7"><span class="color-x" aria-hidden="true">×</span></button>
+                        <button class="color-option" data-theme="8"><span class="color-x" aria-hidden="true">×</span></button>
+                    </div>
+                </div>
+                <div class="step-button-row">
+                    <button class="Makeaccount-button4" type="button" data-show-step="signup-preferences">Go to next step<span class="pill-icon">→</span></button>
+                </div>
+                <!-- 히어로 텍스트 -->
+                <div class="Herotext">
+                    <h2>Create your Space</h2>
+                </div>  
+            </div>
+        </section>
+
+
+        
+        <!-- 계정만들기3페이지 -->
+        <section class="page Makeaccount3" data-step="signup-preferences">
+            <div class="Makeaccount3">
+                <div class="moodtag-wrap theme-tag-grid">
+                    <div class="moodtag-block">
+                        <div class="moodtag-title">Choose your travel vibe     </div>
+                        <div class="theme-tag">
+                                <button class="tag-option Moodtag" data-theme="1"><span class="dot"></span>Relaxing/Chill<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="2"><span class="dot"></span>Foodie Adventure<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="3"><span class="dot"></span>Nature&Outdoors<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="4"><span class="dot"></span>Entertainment<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="5"><span class="dot"></span>Cultural&Historical<span class="tag-x" aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+
+                    <div class="moodtag-block">
+                        <div class="moodtag-title">Choose what you want to see</div>
+                        <div class="theme-tag">
+                                <button class="tag-option Moodtag" data-theme="1"><span class="dot"></span>Relaxing/Chill<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="2"><span class="dot"></span>Foodie Adventure<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="3"><span class="dot"></span>Nature&Outdoors<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="4"><span class="dot"></span>Entertainment<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-option Moodtag" data-theme="5"><span class="dot"></span>Cultural&Historical<span class="tag-x" aria-hidden="true">×</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-button-row-1">
+                    <button class="Makeaccount-button4">Go to next step<span class="pill-icon">→</span></button>
+                </div>
+                <!-- 히어로 텍스트 -->
+                <div class="Herotext">
+                    <h2>Create your Space</h2>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="global-footer">
+        <nav class="footer-inner">
+            <a class="footer-logo">Airplane_Mode</a>
+            <a href="mailto:juliachoish@gmail.com" class="footer"><span class="footer-email">E-mail: juliachoish@gmail.com</span></a>
+            <a class="footer">© 2025 Airplane mode All rights reserved </a>
+            <a href="https://www.instagram.com/seung_h_2/" class="footer-insta">
+                <svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" stroke="black"/>
+                <circle cx="12" cy="12" r="5.5" stroke="black"/>
+                <circle cx="18.6" cy="5.40001" r="1.3" stroke="black"/>
+                </svg>
+            </a>
+        </nav>
+    </footer>
+    
+    <script src="login.js"></script>
+    <script type="module" src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirplaneMode_MyRoom</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="myroom.css">
+    <link rel="stylesheet" href="myroom-addcontent.css">
+    <link rel="stylesheet" href="detail-panel.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+</head>
+
+<body class="myroom">
+    <!-- 배경 -->
+    <div id="webgl-container" aria-hidden="true"></div>
+
+    <!-- 헤더레이어 -->
+    <header class="global-header">
+        <div class="header-inner">
+
+            <nav class="header-nav header-nav--left">
+                <a href="index.html" class="nav-link" >Home</a>
+                <a href="MyRoom.html" class="nav-link">My&nbsp;Room</a>
+            </nav>
+
+            <div class="header-center">
+                <a href="index.html" class="header-logo">Airplane_Mode</a>
+            </div>
+
+            <nav class="header-nav header-nav--right">
+                <a href="Search.html" class="nav-link">Search</a>
+                <a href="Library.html" class="nav-link">Library</a>
+                <a href="login.html" class="nav-link nav-icon">
+                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.4555 22.2764C17.7466 20.3677 15.2635 19.1667 12.5 19.1667C9.73646 19.1667 7.25323 20.3677 5.54427 22.2764M12.5 24.5C5.87258 24.5 0.5 19.1274 0.5 12.5C0.5 5.87258 5.87258 0.5 12.5 0.5C19.1274 0.5 24.5 5.87258 24.5 12.5C24.5 19.1274 19.1274 24.5 12.5 24.5ZM12.5 15.1667C10.2909 15.1667 8.5 13.3758 8.5 11.1667C8.5 8.95753 10.2909 7.16667 12.5 7.16667C14.7091 7.16667 16.5 8.95753 16.5 11.1667C16.5 13.3758 14.7091 15.1667 12.5 15.1667Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </nav> 
+
+            <nav class="header-nav header-nav--burger">
+                <button class="burger-btn" aria-label="Open menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 17H19M5 12H19M5 7H19" stroke="#15181D" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </nav>
+
+        </div> 
+
+        <!-- ✅ 모바일 전용 메뉴 패널 -->
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <div class="mobile-menu__inner">
+            <div class="mobile-menu__top">
+                <a href="index.html" class="header-logo">Airplane_Mode</a>
+                <div class="mobile-menu__action">
+                    <a href="login.html" class="mobile-link mobile-link--icon" aria-label="Profile">
+                        <svg width="22" height="22" viewBox="0 0 25 25" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.4555 22.2764C17.7466 20.3677 15.2635 19.1667 12.5 19.1667
+                            C9.73646 19.1667 7.25323 20.3677 5.54427 22.2764
+                            M12.5 24.5C5.87258 24.5 0.5 19.1274 0.5 12.5
+                            C0.5 5.87258 5.87258 0.5 12.5 0.5
+                            C19.1274 0.5 24.5 5.87258 24.5 12.5
+                            C24.5 19.1274 19.1274 24.5 12.5 24.5
+                            Z
+                            M12.5 15.1667C10.2909 15.1667 8.5 13.3758 8.5 11.1667
+                            C8.5 8.95753 10.2909 7.16667 12.5 7.16667
+                            C14.7091 7.16667 16.5 8.95753 16.5 11.1667
+                            C16.5 13.3758 14.7091 15.1667 12.5 15.1667Z"
+                            stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <button class="mobile-menu__close" type="button" aria-label="Close menu">X</button>
+                </div>
+            </div>
+
+            <nav class="mobile-menu__nav">
+                <a href="index.html" class="mobile-link">Home</a>
+                <a href="MyRoom.html" class="mobile-link">My Room</a>
+                <a href="Search.html" class="mobile-link">Search</a>
+                <a href="Library.html" class="mobile-link">Library</a>
+            </nav>
+            </div>
+        </div>
+
+        <!-- ✅ 배경 누르면 닫히는 오버레이 -->
+        <div class="mobile-overlay" data-close-menu></div>
+    </header>
+
+
+
+    <!-- 사이드바, 버튼 -->
+    <main class="myroom-ui">
+       <aside id="mySidenav" class="sidenav" aria-hidden="true">
+            <div class="sidenav-top">
+                <button class="header-back is-hidden" type="button" aria-label="Back">&lt;</button>
+                <h2 class="sidenav-title" id="sidenavTitle">My Room</h2>
+            </div>
+
+            <button class="mymenu" id="myMenuIcon" type="button" data-panel="profile" aria-label="Profile">
+            <img id="myroomProfileImg" class="myroom-profile-img" alt="Profile" />
+            </button>
+
+
+            <!-- 홈 메뉴 -->
+            <nav class="sidenav-home" id="sidenavHome">
+                <a href="#" data-panel="map">Map</a>
+                <a href="#" data-panel="music">Music</a>
+                <a href="#" data-panel="gallery">Gallery</a>
+                <a href="#" data-panel="video">Video</a>
+            </nav>
+
+            <!-- 패널 -->
+            <section class="sidenav-panels" id="sidenavPanels">
+                    <div class="panel" data-panel="profile">
+                        <svg width="80" height="80" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M19.4555 22.2764C17.7466 20.3677 15.2635 19.1667 12.5 19.1667C9.73646 19.1667 7.25323 20.3677 5.54427 22.2764M12.5 24.5C5.87258 24.5 0.5 19.1274 0.5 12.5C0.5 5.87258 5.87258 0.5 12.5 0.5C19.1274 0.5 24.5 5.87258 24.5 12.5C24.5 19.1274 19.1274 24.5 12.5 24.5ZM12.5 15.1667C10.2909 15.1667 8.5 13.3758 8.5 11.1667C8.5 8.95753 10.2909 7.16667 12.5 7.16667C14.7091 7.16667 16.5 8.95753 16.5 11.1667C16.5 13.3758 14.7091 15.1667 12.5 15.1667Z" stroke="white" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke-linejoin="round"/> </svg>
+                        <p>Tag</p>
+                        <p>Introduction</p>
+                    </div>
+                <div class="panel" data-panel="map">
+                    <h3>Map</h3>
+                    <p>List</p>
+                </div>
+
+                <!-- 세부 메뉴(음악 리스트) -->
+                <div class="panel" data-panel="music">
+                    <button class="open-form-btn add-btn" type="button" data-form="music">
+                        <span class="add-btn__icon">+</span>
+                        <span class="add-btn__text">Add content</span>
+                    </button>
+                    <p class="panel-desc">Add music that you want to memorize</p>
+
+                    <div class="content-list" id="contentList-music"></div>
+                </div>
+
+                <!-- 세부 메뉴(사진 리스트)-->
+                <div class="panel" data-panel="gallery">
+                    <button class="open-form-btn add-btn" type="button" data-form="gallery">
+                        <span class="add-btn__icon">+</span>
+                        <span class="add-btn__text">Add content</span>
+                    </button>
+                    <p class="panel-desc">Add photos that you want to memorize</p>
+
+                    <div class="content-list" id="contentList-gallery"></div>
+                </div>
+
+                <!-- 세부 메뉴(영상 리스트)-->
+                <div class="panel" data-panel="video">
+                    <button class="open-form-btn add-btn" type="button" data-form="video">
+                        <span class="add-btn__icon">+</span>
+                        <span class="add-btn__text">Add content</span>
+                    </button>
+                    <p class="panel-desc">Add videos you want to memorize</p>
+
+                    <div class="content-list" id="contentList-video"></div>
+                </div>
+            </section>
+
+            <button class="side-tab side-tab--toggle" type="button" aria-label="Open sidebar">
+                <span class="side-tab__text">Open</span>
+                <span class="side-tab__iconbox" aria-hidden="true">
+                    <span class="side-tab__icon">›</span>
+                </span>
+            </button>
+       </aside>
+
+       <!-- 디테일 패널 -->
+        <section id="detailPanel" class="detail-panel" aria-hidden="true">
+
+            <div class="detail-body">
+                
+                <!-- ✅ READ ONLY VIEW -->
+                <section class="detail-view detail-view--readonly" data-detail="view">
+                    <button class="close-center-page-btn" type="button">X</button>
+
+                    <div class="add-form__grid">
+                        <!-- LEFT -->
+                        <section class="add-form__left">
+                        <div class="upload-box">
+                            <div id="viewMedia" class="media-preview media-preview--square"></div>
+                        </div>
+
+                        <h3 id="viewTitle"></h3>
+                        <p id="viewDate"></p>
+                        <p id="viewLocation"></p>
+                        </section>
+
+                        <!-- RIGHT -->
+                        <section class="add-form__right">
+                        <h4 class="add-form__section-title">Mood Tag</h4>
+                        <div class="tag-row tag-row--compact" id="viewTags"></div>
+
+                        <h4 class="add-form__section-title">Memory about this moment</h4>
+                        <p id="viewMemory"></p>
+                        </section>
+                    </div>
+                </section>
+
+
+
+                <!-- ✅ ADD CONTENT VIEW -->
+                <button
+                id="btnSave"
+                class="chip-btn save-center-page-btn"
+                type="button"
+                >
+                    Save Content<span class="chip-btn__icon">✓</span>
+                </button>
+
+                <!-- 음악용 입력창 -->
+                <form class="detail-view" data-detail="add-music">
+                    <button class="close-center-page-btn" type="button">X</button>
+
+
+                    <div class="add-form__grid">
+                        <!-- LEFT -->
+                        <section class="add-form__left">
+                            <div class="upload-box music-box" data-state="empty">
+                                <button class="chip-btn js-open" type="button">
+                                    Add music <span class="chip-btn__icon">⧉</span>
+                                </button>
+
+                                <div class="music-edit js-edit">
+                                    <input class="js-url" type="text" placeholder="Paste YouTube link" />
+                                    <button class="chip-btn js-done" type="button">Done</button>
+                                </div>
+
+                                <div class="music-square js-square">
+                                    <img class="js-thumb" alt="YouTube thumbnail" />
+                                    <iframe
+                                        class="js-player"
+                                        title="YouTube player"
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen
+                                    ></iframe>
+                                    <button class="chip-btn overlay-btn js-editBtn" type="button">
+                                    Change music <span class="chip-btn__icon">⧉</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <input type="text" placeholder="Enter the title"/>
+                            <input type="text" placeholder="Enter the date"/>
+                            <div class="input-icon">
+                                <span class="input-icon__icon" aria-hidden="true">📍</span>
+                                <input type="text" placeholder="Enter the location"/>
+                            </div>
+                        </section>
+
+                        <!-- RIGHT -->
+                        <section class="add-form__right">
+                            <h4 class="add-form__section-title">Mood Tag</h4>
+
+                            <div class="tag-row tag-row--compact">
+                                <button class="tag-pill" type="button"><span class="dot"></span>Relaxing / Chill<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Foodie Adventure<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Nature &amp; Outdoors<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Entertainment<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Cultural &amp; Historical<span class="tag-x" aria-hidden="true">×</span></button>
+                            </div>
+
+                            <h4 class="add-form__section-title">Memory about this moment</h4>
+                            <textarea class="add-form__input" rows="3" placeholder="What is the most like? Leave a short memo with music."></textarea>
+                        </section>
+                    </div>
+                </form>
+
+                <!-- 사진용 입력창 -->
+                <form class="detail-view" data-detail="add-gallery">
+                    <button class="close-center-page-btn" type="button">X</button>
+
+                    <div class="add-form__grid">
+                        <!-- LEFT -->
+                        <section class="add-form__left">
+
+                        <!-- ✅ PHOTO 업로드 박스 -->
+                        <div class="upload-box photo-box" data-state="empty">
+                            <!-- EMPTY STATE -->
+                            <button class="chip-btn js-photo-open" type="button">
+                                Add photo <span class="chip-btn__icon">⧉</span>
+                            </button>
+
+                            <!-- 실제 파일 input (숨김) -->
+                            <input class="js-photo-file" type="file" accept="image/*" hidden />
+
+                            <!-- FILLED STATE -->
+                            <div class="photo-square js-photo-square" aria-label="Photo preview">
+                                <!-- 오버레이 버튼: 사진 위 레이어 -->
+                                <button class="chip-btn overlay-btn js-photo-editBtn" type="button">
+                                    Change photo<span class="chip-btn__icon">⧉</span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <input class="js-title" type="text" placeholder="Enter the title" />
+                        <input class="js-date" type="text" placeholder="Enter the date" />
+                        <div class="input-icon">
+                            <span class="input-icon__icon" aria-hidden="true">📍</span>
+                            <input class="js-location" type="text" placeholder="Enter the location" />
+                        </div>
+                        </section>
+
+                        <!-- RIGHT -->
+                        <section class="add-form__right">
+                        <h4 class="add-form__section-title">Mood Tag</h4>
+
+                        <div class="tag-row tag-row--compact">
+                            <button class="tag-pill" type="button"><span class="dot"></span>Relaxing / Chill<span class="tag-x" aria-hidden="true">×</span></button>
+                            <button class="tag-pill" type="button"><span class="dot"></span>Foodie Adventure<span class="tag-x" aria-hidden="true">×</span></button>
+                            <button class="tag-pill" type="button"><span class="dot"></span>Nature &amp; Outdoors<span class="tag-x" aria-hidden="true">×</span></button>
+                            <button class="tag-pill" type="button"><span class="dot"></span>Entertainment<span class="tag-x" aria-hidden="true">×</span></button>
+                            <button class="tag-pill" type="button"><span class="dot"></span>Cultural &amp; Historical<span class="tag-x" aria-hidden="true">×</span></button>
+                        </div>
+
+                        <h4 class="add-form__section-title">Memory about this moment</h4>
+                        <textarea class="add-form__input js-memo" rows="3" placeholder="What is the most like? Leave a short memo with photo."></textarea>
+                        </section>
+                    </div>
+                </form>
+
+
+                <!-- 비디오용 입력창-->
+                <form class="detail-view" data-detail="add-video">
+                    <button class="close-center-page-btn" type="button">X</button>
+                    <div class="add-form__grid">
+                        <!-- LEFT -->
+                        <section class="add-form__left">
+                            <div class="upload-box video-box" data-state="empty">
+                                <!-- EMPTY: Add video -->
+                                <button class="chip-btn js-video-open" type="button">
+                                    Add video <span class="chip-btn__icon">⧉</span>
+                                </button>
+
+                                <!-- 실제 파일 input (숨김) -->
+                                <input
+                                    class="js-video-file"
+                                    type="file"
+                                    accept="video/*"
+                                    hidden
+                                />
+
+                                <!-- FILLED: 비디오 썸네일/미리보기 -->
+                                <div class="video-square js-video-square">
+                                    <video
+                                    class="js-video-preview"
+                                    muted
+                                    playsinline
+                                    preload="metadata"
+                                    ></video>
+
+                                    <!-- overlay 버튼 (음악 Edit 버튼이랑 동일 역할) -->
+                                    <button class="chip-btn overlay-btn js-video-editBtn" type="button">
+                                    Change video <span class="chip-btn__icon">⧉</span>
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+                            <input type="text" placeholder="Enter the title"/>
+                            <input type="text" placeholder="Enter the date"/>
+                            <div class="input-icon">
+                                <span class="input-icon__icon" aria-hidden="true">📍</span>
+                                <input type="text" placeholder="Enter the location"/>
+                            </div>
+                        </section>
+
+                        <!-- RIGHT -->
+                        <section class="add-form__right">
+                            <h4 class="add-form__section-title">Mood Tag</h4>
+
+                            <div class="tag-row tag-row--compact">
+                                <button class="tag-pill" type="button"><span class="dot"></span>Relaxing / Chill<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Foodie Adventure<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Nature &amp; Outdoors<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Entertainment<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Cultural &amp; Historical<span class="tag-x" aria-hidden="true">×</span></button>
+                            </div>
+
+                            <h4 class="add-form__section-title">Memory about this moment</h4>
+                            <textarea class="add-form__input" rows="3" placeholder="What is the most like? Leave a short memo with music."></textarea>
+                        </section>
+                    </div>
+                    
+                </form>
+
+                <!-- 디테일 패널 -->
+                <form class="detail-view" data-detail="add-content">
+                    <button class="close-center-page-btn" type="button">X</button>
+
+                    <div class="add-form__grid">
+                        <!-- LEFT -->
+                        <section class="add-form__left">
+
+                        <!-- ✅ MUSIC media -->
+                        <div class="upload-box music-box media-slot" data-media="music" hidden>
+                            ... (지금 너 음악 박스 그대로) ...
+                        </div>
+
+                        <!-- ✅ PHOTO media (단순화) -->
+                        <div class="upload-box photo-box media-slot" data-media="photo" hidden>
+                            <div class="media-preview media-preview--square" style="background-image:url('')"></div>
+                            <input class="js-photo" type="file" accept="image/*">
+                        </div>
+
+                        <!-- ✅ VIDEO media (단순화) -->
+                        <div class="upload-box video-box media-slot" data-media="video" hidden>
+                            <div class="media-preview media-preview--square" style="background-image:url('')"></div>
+                            <input class="js-video" type="file" accept="video/*">
+                            <!-- 옵션: 썸네일 파일도 따로 -->
+                            <input class="js-video-thumb" type="file" accept="image/*">
+                        </div>
+
+                        <!-- ✅ 공통 입력 -->
+                        <input class="js-title" type="text" placeholder="Enter the title"/>
+                        <input class="js-date" type="text" placeholder="Enter the date"/>
+                        <div class="input-icon">
+                            <span class="input-icon__icon" aria-hidden="true">📍</span>
+                            <input class="js-location" type="text" placeholder="Enter the location"/>
+                        </div>
+                        </section>
+
+                        <!-- RIGHT (공통 유지) -->
+                        <section class="add-form__right">
+                            <h4 class="add-form__section-title">Mood Tag</h4>
+
+                            <div class="tag-row tag-row--compact">
+                                <button class="tag-pill" type="button"><span class="dot"></span>Relaxing / Chill<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Foodie Adventure<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Nature &amp; Outdoors<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Entertainment<span class="tag-x" aria-hidden="true">×</span></button>
+                                <button class="tag-pill" type="button"><span class="dot"></span>Cultural &amp; Historical<span class="tag-x" aria-hidden="true">×</span></button>
+                            </div>
+
+                            <h4 class="add-form__section-title">Memory about this moment</h4>
+                            <textarea class="add-form__input" rows="3" placeholder="What is the most like? Leave a short memo with conte."></textarea>
+                        </section>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- footer -->
+    <footer class="global-footer">
+        <nav class="footer-inner">
+            <a class="footer-logo">Airplane_Mode</a>
+            <a href="mailto:juliachoish@gmail.com" class="footer"><span class="footer-email">E-mail: juliachoish@gmail.com</span></a>
+            <a class="footer">© 2025 Airplane mode All rights reserved </a>
+            <a href="https://www.instagram.com/seung_h_2/" class="footer-insta">
+                <svg class="insta-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" stroke="black"/>
+                <circle cx="12" cy="12" r="5.5" stroke="black"/>
+                <circle cx="18.6" cy="5.40001" r="1.3" stroke="black"/>
+                </svg>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- 라이브러리
+    <script src="https://unpkg.com/three@0.150.0/build/three.min.js"></script> -->
+
+    <!-- JS -->
+    <script type="module" src="supabase-init.js"></script>
+    <script type="module" src="myroom-data.js" defer></script>
+    <script type="module" src="myroom-3d.js" defer></script>
+    <script type="module" src="myroom-menu.js" defer></script>
+    <script type="module" src="myroom-contentcard.js" defer></script>
+    <script type="module" src="myroom-addcontent.js" defer></script>
+    <script type="module" src="script.js" defer></script>
+
+</body>
+</html>

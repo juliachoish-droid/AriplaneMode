@@ -1,0 +1,408 @@
+.library-page{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: calc(var(--header-h) + var(--page-top-gap));
+  padding-bottom: calc(var(--footer-h) + var(--page-bottom-gap));
+  padding-left: var(--page-x);
+  padding-right: var(--page-x);
+  display: block;
+}
+
+.section-block{
+  max-width: 960px;
+  margin: 24px auto 0;
+  padding: 0;
+}
+
+
+/* 타이틀 */
+.lib-title{
+  font-size: 20px;
+  margin: 14px 0 12px;
+  font-weight: 300;
+}
+
+/* Recommended Rooms: 동그라미 줄 */
+.recommended-row{
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.rec-avatar{
+  width: 80px;
+  height: 80px;
+  display:block;
+  text-decoration:none;
+  background-size:cover;
+  background-position:center;
+  border-radius:999px;
+  position: relative;
+  overflow: visible;
+}
+.rec-follow-btn{
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  transform: none;
+  border: 1px solid #111;
+  background: #ddd;
+  border-radius: 999px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  color: #111;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.rec-follow-btn .rec-follow-icon--outline,
+.rec-follow-btn .rec-follow-icon--filled{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .15s ease;
+  font-size: 1.3em;
+}
+.rec-follow-icon--filled{
+  color: #CCFD50;
+  opacity: 0;
+}
+.rec-follow-btn.is-active .rec-follow-icon--outline{
+  opacity: 0;
+}
+.rec-follow-icon--outline{
+  color: #111;
+}
+.rec-follow-btn.is-active .rec-follow-icon--filled{
+  opacity: 1;
+  text-shadow:
+    -1px 0 #111,
+    1px 0 #111,
+    0 -1px #111,
+    0 1px #111;
+}
+.rec-follow-btn:focus-visible{
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+.rec-avatar:hover .rec-follow-btn{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 아래 2컬럼 그리드 */
+.lib-grid{
+  margin-top: 34px;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 콘텐츠 / 팔로우 */
+  gap: 24px;
+  align-items: start;
+}
+
+/* 각 컬럼이 "안에서 버튼을 아래로" 보내기 위해 */
+.lib-col{
+  display: flex;
+  flex-direction: column;
+  min-height: 300px; /* 버튼을 아래로 보내는 느낌(원하면 조절) */
+}
+
+/* 왼쪽: 북마크 그리드 3x2 */
+.bookmark-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bm-card{
+  aspect-ratio: 1 / 1;
+  background: #d9d9d9;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  overflow: hidden; /* 오버레이 삐져나오는 거 방지 */
+}
+.content-save-btn{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  border: 1px solid #000;
+  background: #fff;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+.content-save-btn.is-active{
+  font-weight: 700;
+  color: #CCFD50;
+  text-shadow:
+    -1px 0 #111,
+    1px 0 #111,
+    0 -1px #111,
+    0 1px #111;
+}
+.content-save-btn .star-icon--outline,
+.content-save-btn .star-icon--filled{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .15s ease;
+  font-size: 1.3em;
+}
+.content-save-btn .star-icon--filled{
+  color: #CCFD50;
+  opacity: 0;
+}
+.content-save-btn .star-icon--outline{
+  color: #111;
+}
+.content-save-btn.is-active .star-icon--outline{
+  opacity: 0;
+}
+.content-save-btn.is-active .star-icon--filled{
+  opacity: 1;
+}
+
+/* toast (undo) */
+.toast-undo{
+  position: fixed;
+  right: 16px;
+  top: calc(var(--header-h) - 15px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #CCFD50;
+  color: #111;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 100000;
+}
+.toast-undo.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.toast-undo__btn{
+  border: 1px solid #111;
+  background: #fff;
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* 유튜브 썸네일 확대 */
+.bm-card--youtube{
+  background-size: 180% 180%;
+}
+
+/* 카드 전체 덮는 오버레이 */
+.bm-card::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(1,1,1,0.5);
+
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+/* hover 시 오버레이 ON */
+.bm-card:hover::after{
+  opacity: 1;
+}
+
+/* 텍스트는 오버레이 위 */
+.bm-text{
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+/* hover 시 텍스트 보이기 */
+.bm-card:hover .bm-text{
+  opacity: 1;
+}
+
+
+
+/* 마지막 열/행 선 정리(대충 버전) */
+.bm-card:nth-child(3n){
+  border-right: none;
+}
+.bm-card:nth-last-child(-n+3){
+  border-bottom: none;
+}
+
+/* 오른쪽: 팔로우 리스트 */
+.follow-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 6px;
+}
+.follow-item{
+  position: relative;
+}
+.follow-item{
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 14px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+.follow-item .avatar{
+  position: relative;
+  overflow: visible;
+}
+.follow-item .content-save-btn{
+  top: -6px;
+  right: -6px;
+  left: auto;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+.follow-item .avatar:hover .content-save-btn,
+.follow-item .avatar:focus-within .content-save-btn{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.avatar{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 텍스트 */
+.name{ font-size: 18px; }
+.desc{
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+
+.pill-btn{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 8px 5px 16px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pill-icon{
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #111;
+  border-radius: 999px;
+}
+
+.pill-btn:hover{
+  background: #f3f3f3;
+}
+
+.pill-btn:hover .pill-icon{
+  background: #CCFD50;
+}
+
+/* 버튼을 "영역 아래쪽"으로 */
+.lib-actions{
+  margin-top: auto;
+  display: flex;
+  justify-content: center; /* 목업처럼 아래 가운데 느낌 */
+  padding-top: 18px;
+}
+
+@media (max-width: 870px){
+  .lib-grid{
+    grid-template-columns: 1fr;
+  }
+
+   .lib-col{
+    min-height: auto;     /* 고정 높이 제거 */
+  }
+
+  .lib-actions{
+    margin-top: 16px;     /* auto 대신 딱 붙게 */
+    padding-top: 0;       /* 필요하면 */
+  }
+
+  .bookmark-grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* .bm-card:nth-child(3n){ border-right: 1px solid #111; } /* 3열 규칙 무효 */
+  /* .bm-card:nth-child(2n){ border-right: none; }          2열 규칙 적용 */ */
+  .bm-card:nth-last-child(-n+3){ border-bottom: 1px solid #111; }
+  .bm-card:nth-last-child(-n+2){ border-bottom: none; }
+}
+
+
+.page.library-page{
+  position: relative;
+  z-index: 1;
+}
+
+/* 혹시 pseudo로 깔린 배경이면 */
+.page.library-page::before,
+.page.library-page::after{
+  z-index: -1;
+  pointer-events: none;
+}
+.bm-card:hover .content-save-btn,
+.bm-card:focus-within .content-save-btn{
+  opacity: 1;
+  pointer-events: auto;
+}

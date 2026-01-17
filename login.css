@@ -1,0 +1,538 @@
+
+.main.page-container{
+  padding-top: calc(var(--header-h) + var(--page-top-gap));
+  padding-left: var(--page-x);
+  padding-right: var(--page-x);
+  padding-bottom: calc(var(--footer-h) + var(--page-bottom-gap)+ 180px);
+}
+
+section.page{
+  display: none;
+  width: 100%;
+  max-width: 480px;   /* ⭐ 핵심 */
+  margin: 0 auto;
+
+  padding-inline: 16px;  /* 모바일/웹 통일 */
+  padding-bottom: 80px;
+}
+
+section.page.is-active{
+  display: block;
+  padding-top: 80px;
+}
+
+.Createaccount-button1 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 8px 5px 16px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background:#CCFD50;
+
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pill-icon{ 
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.is-hidden{
+  display: none !important;
+}
+
+.profile-row{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.profile-content{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.profile-upload-label{
+  margin-left: auto;
+}
+.profile-upload-input{
+  display: none;
+}
+
+.avatar{
+  width: 80px;
+  height: 80px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  background-size: cover;
+  background-position: center;
+}
+
+.avatar::before{
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+.avatar::after{
+  content: "";
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  width: 34px;
+  height: 22px;
+  border: 1px solid #111;
+  border-top: none;
+  border-radius: 0 0 999px 999px;
+  transform: translateX(-50%);
+}
+
+.avatar.has-image::before,
+.avatar.has-image::after{
+  display: none;
+}
+
+.login-actions{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.login-actions .Createaccount-button1{
+  align-self: flex-end;
+}
+
+.login-actions .Createaccount-button2{
+  align-self: flex-start;
+}
+
+.login-page .form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.login-page .form-group input{
+  border: none;
+  border-bottom: 1px solid #111;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+}
+
+.login-page .form-group input:focus{
+  outline: none;
+  border-bottom-color: #000;
+}
+
+.step-button-row{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+  margin-bottom: 80px;
+}
+
+.step-button-row-1{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+  margin-bottom: 80px;
+}
+
+.moodtag-wrap{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: flex-start;
+  margin-bottom: 48px;
+}
+
+.moodtag-block{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 420px;
+}
+
+.tag-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.moodtag-title{
+  font-size: 16px;
+  width:300px
+}
+
+
+.Makeaccount1 .form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.Makeaccount1 .form-group input{
+  border: none;
+  border-bottom: 1px solid #111;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+}
+
+.Makeaccount1 .form-group input:focus{
+  outline: none;
+  border-bottom-color: #000;
+}
+
+.modal-overlay{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 9990;
+  padding: 16px;
+}
+
+.modal-overlay.is-active{
+  display: flex;
+}
+
+.modal{
+  width: min(360px, 90vw);
+  border: 1px solid #111;
+  border-radius: 0;
+  background: #CCFD50;
+  padding: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.modal-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header p{
+  margin: 0;
+  text-align: left;
+}
+
+.emailModal-Xbutton{
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.theme-block{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.theme-block .section-title{
+  margin-bottom: 24px;
+}
+
+.theme-color{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 56px));
+  gap: 16px 32px;
+  justify-content: space-between;
+}
+
+/* 네모 컬러 카드 */
+.color-option{
+  position: relative;
+  width: 56px;
+  aspect-ratio: 1 / 1;
+  background: #eee;
+  cursor: pointer;
+  border: 1px solid #111;        /* 네모 테두리도 원하면 */
+}
+
+.color-option:focus,
+.color-option:focus-visible{
+  outline: none;
+}
+
+/* 선택되면 강조 (원하면) */
+.color-option.selected{
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.10);
+}
+
+/* X 기본은 숨김 */
+.color-option .color-x{
+  display: none;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  width: 18px;
+  height: 18px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+
+  font-size: 12px;
+  line-height: 1;
+  place-items: center;
+}
+
+.color-option.selected .color-x{
+  display: grid;
+}
+
+
+/* 컬러들 */
+.color-option[data-theme="1"] { background: #CCFD50; }
+.color-option[data-theme="2"] { background: #233B24; }
+.color-option[data-theme="3"] { background: #6396FF; }
+.color-option[data-theme="4"] { background: #1C2968; }
+.color-option[data-theme="5"] { background: #F3AEC6; }
+.color-option[data-theme="6"] { background: #643C94; }
+.color-option[data-theme="7"] { background: #DA3A2F; }
+.color-option[data-theme="8"] { background: #4A2930; }
+
+
+.Createaccount-button2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 9px 16px 9px 16px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.Createaccount-button2:hover{
+  background: #f3f3f3;
+}
+
+.Makeaccount-button3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 8px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #CCFD50;
+
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.Makeaccount1 .Makeaccount-button3{
+  align-self: flex-end;
+  width: auto;
+}
+
+.Makeaccount-button3.is-verified{
+  background: #f3f3f3;
+  color: #111;
+}
+
+.Makeaccount-button4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 8px 5px 16px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.Makeaccount-button4:hover{
+  background: #f3f3f3;
+}
+
+.Makeaccount-button4:hover .pill-icon{
+  background: #CCFD50;
+}
+
+
+
+.tag-option .dot{
+  width: 20px;
+  height: 20px;
+  border: 1px solid #111;
+  border-radius: 50%;
+
+  display: inline-grid;
+  place-items: center;
+}
+
+.tag-option.is-active .dot::after{
+  content: "✓";
+  font-weight: 300;
+}
+
+.tag-option{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 5px 16px 5px 8px;
+  border: 1px solid #111;
+  border-radius: 999px;
+  background: #fff;
+
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tag-option:hover{
+  background: #f3f3f3;
+}
+
+/* 선택 상태 (나중에 JS로 붙일 클래스) */
+.tag-option.is-active{
+  background: #CCFD50;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.10);
+}
+
+.tag-option.is-active .dot{
+  background: #fff;
+}
+
+.tag-option.is-active .dot::after{
+  content: "✓";
+  font-weight: 300;
+}
+
+.tag-option{
+  position: relative;
+}
+
+.theme-tag{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.theme-tag-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(370px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+  justify-content: center;
+}
+
+.theme-tag-block{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
+/* 기본은 숨김 */
+.tag-x{
+  display: none;
+}
+
+/* 선택된 상태에서만 x 표시 */
+.tag-option.is-active .tag-x{
+  display: grid;
+  place-items: center;
+
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  width: 18px;
+  height: 18px;
+  border: 1px solid #111;
+  border-radius: 50%;
+  background: #fff;
+
+  font-size: 12px;
+  line-height: 1;
+}
+
+.modal-overlay{
+  padding: 24px;
+}
+
+.modal-message{
+  margin: 0;
+}
+
+@media (max-width: 870px){
+    section.page.is-active{
+    padding-top: 0px;
+  }
+  .mood-tags{
+    justify-content: flex-start;
+  }
+  .Herotext{
+    display: none;
+  }
+   .theme-tag-grid{
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+  }
+  .moodtag-wrap {
+    gap: 40px;          /* 블록 사이 간격 */
+    margin-bottom: 40px;
+  }
+  .moodtag-block {
+    gap: 20px;          /* 제목-태그 간 간격 */
+    max-width: 420px;
+    margin: 0 auto;
+    justify-content: flex-start;
+  }
+  .main.page-container{
+    padding-top: calc(var(--header-h) + 24px);
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: calc(var(--footer-h) + 24px);
+  }
+}
